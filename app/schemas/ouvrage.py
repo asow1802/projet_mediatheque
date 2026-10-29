@@ -2,7 +2,7 @@ from datetime import date
 from pydantic import BaseModel, Field
 
 class OuvrageCreate(BaseModel):
-    isbn: str = Field(min_length=10, max_length=13)
+    isbn: str = Field(min_length=10, max_length=20)
     date_publication: date = Field(
         ge=date(1900, 1, 1), le=date.today()
     )

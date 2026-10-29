@@ -18,7 +18,7 @@ def load_fixtures():
     
     Ouvrages = [
         Ouvrage(titre="Réseaux de neurones convolutifs", date_publication=date(2020,1,1), nombre_de_pages=200, editeur="Editeur A", isbn="978-1234567890", id_auteur=1),
-        Ouvrage(titre="Deep learnig", date_publication=date(2021,2,15), nombre_de_pages=150, editeur="Editeur B", isbn="978,0987654321", id_auteur=2),
+        Ouvrage(titre="Deep learnig", date_publication=date(2021,2,15), nombre_de_pages=150, editeur="Editeur B", isbn="978-0987654321", id_auteur=2),
         Ouvrage(titre="Reconnaissance vocale", date_publication=date(2019,5,10), nombre_de_pages=300, editeur="Editeur C", isbn="978-1122334455", id_auteur=3),
         Ouvrage(titre="Apprentissage automatique", date_publication=date(2022,8,20), nombre_de_pages=250, editeur="Editeur D", isbn="978-5566778899", id_auteur=4),
         Ouvrage(titre="Optimisation", date_publication=date(2020,11,5), nombre_de_pages=180, editeur="Editeur E", isbn="978-6677889900", id_auteur=5),
@@ -60,3 +60,6 @@ def load_fixtures():
     db.add_all(Emprunts)
     db.commit()
     db.close()
+
+if __name__ == "__main__":
+    load_fixtures()
