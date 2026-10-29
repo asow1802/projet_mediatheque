@@ -19,8 +19,9 @@ def get_db():
     finally:
         db.close()
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     with engine.connect() as connection:
         result = connection.exec_driver_sql("SELECT 1")
         print(result.scalar())
+        
 
