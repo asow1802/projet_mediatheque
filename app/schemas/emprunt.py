@@ -18,10 +18,10 @@ class EmpruntUpdate(BaseModel):
         ge=date(1900, 1, 1), le=date.today()
     )
     date_retour_prevue: date = Field(
-        ge=date(1900, 1, 1), le=date.today()
+        ge=date.today()
     )
     date_retour_effective: date | None = Field(
-        ge=date(1900, 1, 1), le=date.today()
+        ge=date.today()
     )
     id_adherent: int    
     id_ouvrage: int

@@ -2,7 +2,7 @@ from sqlalchemy import select
 from datetime import date
 from sqlalchemy.orm import Session
 from app.models.adherent import Adherent
-from app.schemas import AdherentCreate, AdherentUpdate
+from app.schemas.adherent import AdherentCreate, AdherentUpdate
 
 class AdherentRepository:
     def __init__(self, db: Session):

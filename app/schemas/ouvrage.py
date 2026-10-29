@@ -7,8 +7,7 @@ class OuvrageCreate(BaseModel):
         ge=date(1900, 1, 1), le=date.today()
     )
     titre: str = Field(min_length=2)
-    nombre_de_page: int = Field(gt=0)
-    id_ouvrage: int
+    nombre_de_pages: int = Field(gt=0)
     editeur: str = Field(min_length=2)
     id_auteur: int
 class OuvrageUpdate(BaseModel):
@@ -17,6 +16,6 @@ class OuvrageUpdate(BaseModel):
         ge=date(1900, 1, 1), le=date.today()
     )
     titre: str = Field(min_length=2)
-    nombre_de_page: int = Field(gt=0)
-    id_ouvrage: int
+    nombre_de_pages: int = Field(gt=0)
     editeur: str = Field(min_length=2)
+    id_auteur: int

@@ -2,7 +2,7 @@ from datetime import date
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.models.auteur import Auteur
-from app.schemas import AuteurCreate, AuteurUpdate
+from app.schemas.auteur import AuteurCreate, AuteurUpdate
 
 class AuteurRepository:
     def __init__(self, db: Session):

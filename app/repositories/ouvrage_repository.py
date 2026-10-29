@@ -2,7 +2,7 @@ from datetime import date
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.models.ouvrage import Ouvrage
-from app.schemas import OuvrageCreate, OuvrageUpdate
+from app.schemas.ouvrage import OuvrageCreate, OuvrageUpdate
 
 class OuvrageRepository:
     def __init__(self, db: Session):
@@ -23,8 +23,7 @@ class OuvrageRepository:
             isbn=data.isbn,
             date_publication=data.date_publication,
             titre=data.titre,
-            nombre_de_page=data.nombre_de_page,
-            id_ouvrage=data.id_ouvrage,
+            nombre_de_pages=data.nombre_de_pages,
             editeur=data.editeur,
             id_auteur=data.id_auteur
         )
@@ -44,7 +43,7 @@ class OuvrageRepository:
         ouvrage.isbn = data.isbn
         ouvrage.date_publication = data.date_publication
         ouvrage.titre = data.titre
-        ouvrage.nombre_de_page = data.nombre_de_page
+        ouvrage.nombre_de_pages = data.nombre_de_pages
         ouvrage.editeur = data.editeur
         ouvrage.id_auteur = data.id_auteur
         self.db.commit()

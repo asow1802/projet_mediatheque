@@ -1,4 +1,3 @@
-.projet_mediatheque/, 
 *.db
 __pycache__/
 *.pyc

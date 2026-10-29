@@ -3,7 +3,7 @@ from sqlalchemy import String, Integer, Date
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.models.emprunt import Emprunt
-from app.schemas import EmpruntCreate, EmpruntUpdate
+from app.schemas.emprunt import EmpruntCreate, EmpruntUpdate
 
 class EmpruntRepository:
     def __init__(self, db: Session):
