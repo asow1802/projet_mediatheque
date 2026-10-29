@@ -11,11 +11,11 @@ Ce fichier .md liste les différentes  étapes de la réalisation du projet
 
 Environnement python pour installer les librairies nécessaires et spécifiques au projet :
 
-* *python3 -m venv .projet_mediatheque*
+* */usr/bin/python3 -m venv .projet_mediatheque*
 * *source .projet_mediatheque/bin/activate*
 
 Installation des paquets, puis remplissage de requirements.txt
 
-* *pip install fastapi uvicorn alembic pydantic*
+* *pip install fastapi uvicorn alembic "pydantic[email]" sqlalchemy*
 * *pip freeze > requirements.txt*
 * *alembic init alembic*

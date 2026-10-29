@@ -9,7 +9,7 @@ class AdherentCreate(BaseModel):
         ge=date(1900, 1, 1), le=date.today()
     )
     telephone: str = Field(min_length=10, max_length=15)
-    email: str = EmailStr
+    email: EmailStr
 class AdherentUpdate(BaseModel):
     nom: str = Field(min_length=2)
     prenom: str = Field(min_length=3)
@@ -18,4 +18,4 @@ class AdherentUpdate(BaseModel):
         ge=date(1900, 1, 1), le=date.today()
     )
     telephone: str = Field(min_length=10, max_length=15)
-    email: str = EmailStr
+    email: EmailStr

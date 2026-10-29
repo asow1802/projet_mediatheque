@@ -38,10 +38,6 @@ def load_fixtures():
         Emprunt(date_debut="2023-07-05", date_retour_prevue="2023-07-19", date_retour_effective="2023-07-18", id_adherent=7, id_ouvrage=7),
         Emprunt(date_debut="2023-08-15", date_retour_prevue="2023-08-29", date_retour_effective="2023-08-28", id_adherent=8, id_ouvrage=8),
         Emprunt(date_debut="2023-09-20", date_retour_prevue="2023-10-04", date_retour_effective="2023-10-03", id_adherent=9, id_ouvrage=9),
-        Emprunt(date_debut="2023-10-10", date_retour_prevue="2023-10-24", date_retour_effective="2023-10-23", id_adherent=10,id_ouvrage=10),
-        Emprunt(date_debut="2023-11-05", date_retour_prevue="2023-11-19", date_retour_effective="2023-11-18", id_adherent=1, id_ouvrage=2),
-        Emprunt(date_debut="2023-12-15", date_retour_prevue="2023-12-29", date_retour_effective="2023-12-28", id_adherent=2, id_ouvrage=3),
-        Emprunt(date_debut="2024-01-20", date_retour_prevue="2024-02-03", date_retour_effective="2024-02-02", id_adherent=3, id_ouvrage=4)
     ]   
     
     Adherents = [
