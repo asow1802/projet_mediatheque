@@ -1,0 +1,7 @@
+.projet_mediatheque/, 
+*.db
+__pycache__/
+*.pyc
+.projet_mediatheque
+.vscode
+

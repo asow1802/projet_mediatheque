@@ -1,0 +1,4 @@
+from app.repositories.auteur_repository import AuteurRepository
+from app.repositories.ouvrage_repository import OuvrageRepository   
+from app.repositories.adherent_repository import AdherentRepository
+from app.repositories.emprunt_repository import EmpruntRepository
