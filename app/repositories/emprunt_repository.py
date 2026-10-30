@@ -23,7 +23,6 @@ class EmpruntRepository:
             emprunt = Emprunt(
                 date_debut=data.date_debut,
                 date_retour_prevue=data.date_retour_prevue,
-                date_retour_effective=data.date_retour_effective,
                 id_adherent=data.id_adherent,
                 id_ouvrage=data.id_ouvrage
             )
