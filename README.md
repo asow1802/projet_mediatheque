@@ -95,6 +95,10 @@ une fois lien géréré, on peut ajouter /docs pour avoir une interface beaucoup
 - API : http://127.0.0.1:8000
 - Documentation interactive : http://127.0.0.1:8000/docs
 
+---
+
+
+
 # Endpoints
 
 * Lister les auteurs
@@ -145,6 +149,10 @@ GET `/adherents/{id}/emprunts`
 
 POST `/emprunts`
 
+---
+
+
+
 # Architecture du projet
 
 * `app/models` : modèles SQLAlchemy, issus du MLD.
@@ -154,6 +162,11 @@ POST `/emprunts`
 * `app/fixtures.py` : chargement du jeu de données.
 * `alembic/` : configuration et fichiers de migration.
 * `app/routers` : vérifient ce qui nécessite la base : existence des ressources et disponibilité d'un ouvrage.
+* 
+
+---
+
+
 
 # Règles de gestion
 
@@ -170,6 +183,30 @@ POST `/emprunts`
 **EnpruntUpdate** : tous les champs sont modifiables : cela permettra à l'administrateur de pouvoir corriger une erreur de saisie.
 
 ---
+
+# Méthodes spécifiques des repositories
+
+En plus des opérations de base (`get_by_id`, `get_all`, `create`, `update`, `delete`), des méthodes de recherche ont été ajoutées. Elles filtrent directement dans la requête SQL avec `where`, sans charger toute la table en mémoire.
+
+| Repository             | Méthode                         | Renvoie                                           | Utilisée par                                 |
+| ---------------------- | -------------------------------- | ------------------------------------------------- | --------------------------------------------- |
+| `OuvrageRepository`  | `get_by_auteur(id_auteur)`     | la liste des ouvrages d'un auteur                 | `GET /auteurs/{id}/ouvrages`                |
+| `OuvrageRepository`  | `get_by_isbn(isbn)`            | l'ouvrage ayant cet ISBN, ou `None`             | `POST /ouvrages`                            |
+| `AdherentRepository` | `get_by_email(email)`          | l'adhérent ayant cet email, ou `None`          | `POST /adherents`                           |
+| `EmpruntRepository`  | `get_by_adherent(id_adherent)` | la liste des emprunts d'un adhérent              | `GET /adherents/{id}/emprunts`              |
+| `EmpruntRepository`  | `get_by_ouvrage(id_ouvrage)`   | la liste des emprunts d'un ouvrage, rendus ou non | `POST /emprunts`, `DELETE /ouvrages/{id}` |
+
+## Rôle dans les règles métier
+
+- **Doublons :** `get_by_isbn` et `get_by_email` permettent de répondre 409 avant d'écrire en base.
+- **Disponibilité d'un ouvrage :** `POST /emprunts` parcourt les emprunts renvoyés par `get_by_ouvrage`. Si l'un d'eux n'a pas de `date_retour_effective`, l'ouvrage est indisponible et l'API répond 409.
+- **Suppression d'un ouvrage :** `DELETE /ouvrages/{id}` répond 409 dès que `get_by_ouvrage` renvoie au moins un emprunt, afin de conserver l'historique.
+
+Les repositories ne connaissent pas HTTP : ils renvoient des données, et ce sont les routes qui les traduisent en codes de réponse.
+
+---
+
+
 
 # Wébographie
 

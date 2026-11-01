@@ -57,3 +57,7 @@ class AdherentRepository:
         self.db.delete(adherent)
         self.db.commit()
         return True
+    
+    def get_by_email(self, email: str) -> Adherent | None:
+        statement = select(Adherent).where(Adherent.email == email)
+        return self.db.scalars(statement).first()

@@ -1,9 +1,7 @@
 from sqlalchemy import select
-from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.models.emprunt import Emprunt
 from app.schemas.emprunt import EmpruntCreate, EmpruntUpdate
-from app.models.__init__ import Ouvrage, Adherent
 
 class EmpruntRepository:
     def __init__(self, db: Session):
@@ -26,20 +24,6 @@ class EmpruntRepository:
                 id_adherent=data.id_adherent,
                 id_ouvrage=data.id_ouvrage
             )
-            id_adherent = data.id_adherent
-            id_ouvrage = data.id_ouvrage
-            adherent = self.db.get(Adherent, id_adherent)
-            ouvrage = self.db.get(Ouvrage, id_ouvrage)
-            all_emprunts = self.get_all()
-            ## On vérifie si l'ouvrage est déjà emprunté et n'a pas encore été retourné
-            for existing_emprunt in all_emprunts:
-                if existing_emprunt.id_ouvrage == id_ouvrage and existing_emprunt.date_retour_effective is None:
-                    raise ValueError(f"L'ouvrage avec l'identifiant {id_ouvrage} est déjà emprunté et n'a pas encore été retourné.")
-            ## On vérifie si l'adhérent et l'ouvrage existent dans la base de données avant de créer l'emprunt
-            if adherent is None:
-                raise ValueError(f"L'adhérent avec l'identifiant {id_adherent} n'existe pas.")
-            elif ouvrage is None:
-                raise ValueError(f"L'ouvrage avec l'identifiant {id_ouvrage} n'existe pas.")
             self.db.add(emprunt)
             self.db.commit()
             self.db.refresh(emprunt)
@@ -71,5 +55,10 @@ class EmpruntRepository:
         return True
     
     def get_by_adherent(self, id_adherent: int) -> list[Emprunt]:
-        statement = select(Emprunt).where(Emprunt.id_adherent == id_adherent)
+        statement = select(Emprunt).where(Emprunt.id_adherent == id_adherent).order_by(Emprunt.id_emprunt)
+        return list(self.db.scalars(statement).all())
+    
+    
+    def get_by_ouvrage(self, id_ouvrage: int) -> list[Emprunt]:
+        statement = select(Emprunt).where(Emprunt.id_ouvrage == id_ouvrage).order_by(Emprunt.id_emprunt)
         return list(self.db.scalars(statement).all())

@@ -3,7 +3,6 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.models.ouvrage import Ouvrage
 from app.schemas.ouvrage import OuvrageCreate, OuvrageUpdate
-from app.models.__init__ import Auteur
 
 class OuvrageRepository:
     def __init__(self, db: Session):
@@ -29,10 +28,6 @@ class OuvrageRepository:
             genre=data.genre,
             id_auteur=data.id_auteur
         )
-        id_auteur = data.id_auteur
-        auteur = self.db.get(Auteur, id_auteur)
-        if auteur is None:
-            raise ValueError(f"L'auteur avec l'identifiant {id_auteur} n'existe pas.")
         self.db.add(ouvrage)
         self.db.commit()
         self.db.refresh(ouvrage)
@@ -66,5 +61,9 @@ class OuvrageRepository:
         return True
     
     def get_by_auteur(self, id_auteur: int) -> list[Ouvrage]:
-        statement = select(Ouvrage).where(Ouvrage.id_auteur == id_auteur)
+        statement = select(Ouvrage).where(Ouvrage.id_auteur == id_auteur).order_by(Ouvrage.id_ouvrage)
         return list(self.db.scalars(statement).all())
+    
+    def get_by_isbn(self, isbn: str) -> Ouvrage | None:
+        statement = select(Ouvrage).where(Ouvrage.isbn == isbn)
+        return self.db.scalars(statement).first()

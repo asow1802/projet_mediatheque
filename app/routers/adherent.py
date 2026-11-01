@@ -9,6 +9,9 @@ router = APIRouter()
 @router.post("/adherents", status_code=201)
 def create_adherent(adh : AdherentCreate, db : Session = Depends(get_db)):
     new_adh = AdherentRepository(db)
+    existing_adherent = new_adh.get_by_email(adh.email)
+    if existing_adherent:
+        raise HTTPException(status_code=409, detail="Un adhérent avec cet email existe déjà.")
     return new_adh.create(adh)
 
 ## Lister les adherents
