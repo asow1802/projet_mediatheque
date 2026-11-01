@@ -31,7 +31,7 @@ class AdherentRepository:
         self.db.commit()
         self.db.refresh(adherent)
         return adherent
-        
+    ## On doit vérifier les champs qui sont mis à jour pour ne pas écraser les valeurs existantes avec des None
     def update(
         self,
         id_adherent: int,
@@ -40,12 +40,18 @@ class AdherentRepository:
         adherent = self.get_by_id(id_adherent)
         if adherent is None:
             return None
-        adherent.nom = data.nom
-        adherent.prenom = data.prenom
-        adherent.adresse = data.adresse
-        adherent.date_inscription = data.date_inscription
-        adherent.telephone = data.telephone
-        adherent.email = data.email
+        if data.nom is not None:
+            adherent.nom = data.nom
+        if data.prenom is not None:
+            adherent.prenom = data.prenom
+        if data.adresse is not None:
+            adherent.adresse = data.adresse
+        if data.date_inscription is not None:
+            adherent.date_inscription = data.date_inscription
+        if data.telephone is not None:
+            adherent.telephone = data.telephone
+        if data.email is not None:
+            adherent.email = data.email
         self.db.commit()
         self.db.refresh(adherent)
         return adherent
@@ -57,7 +63,7 @@ class AdherentRepository:
         self.db.delete(adherent)
         self.db.commit()
         return True
-    
+    ### On définit la méthode get_by_email pour récupérer un adhérent par son email
     def get_by_email(self, email: str) -> Adherent | None:
         statement = select(Adherent).where(Adherent.email == email)
         return self.db.scalars(statement).first()

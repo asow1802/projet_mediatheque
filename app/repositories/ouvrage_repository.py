@@ -32,7 +32,7 @@ class OuvrageRepository:
         self.db.commit()
         self.db.refresh(ouvrage)
         return ouvrage
-    
+    ## On doit vérifier les champs qui sont mis à jour pour ne pas écraser les valeurs existantes avec des None
     def update(
         self,
         id_ouvrage: int,
@@ -41,12 +41,18 @@ class OuvrageRepository:
         ouvrage = self.get_by_id(id_ouvrage)
         if ouvrage is None:
             return None
-        ouvrage.isbn = data.isbn
-        ouvrage.date_publication = data.date_publication
-        ouvrage.titre = data.titre
-        ouvrage.nombre_de_pages = data.nombre_de_pages
-        ouvrage.editeur = data.editeur
-        ouvrage.genre = data.genre
+        if data.isbn is not None:
+            ouvrage.isbn = data.isbn
+        if data.date_publication is not None:
+            ouvrage.date_publication = data.date_publication
+        if data.titre is not None:
+            ouvrage.titre = data.titre
+        if data.nombre_de_pages is not None:
+            ouvrage.nombre_de_pages = data.nombre_de_pages
+        if data.editeur is not None:
+            ouvrage.editeur = data.editeur
+        if data.genre is not None:
+            ouvrage.genre = data.genre
         ouvrage.id_auteur = data.id_auteur
         self.db.commit()
         self.db.refresh(ouvrage)
@@ -59,11 +65,11 @@ class OuvrageRepository:
         self.db.delete(ouvrage)
         self.db.commit()
         return True
-    
+    ## On définit la méthode get_by_auteur pour récupérer les ouvrages d'un auteur
     def get_by_auteur(self, id_auteur: int) -> list[Ouvrage]:
         statement = select(Ouvrage).where(Ouvrage.id_auteur == id_auteur).order_by(Ouvrage.id_ouvrage)
         return list(self.db.scalars(statement).all())
-    
+    ### On définit la méthode get_by_isbn pour récupérer un ouvrage par son ISBN
     def get_by_isbn(self, isbn: str) -> Ouvrage | None:
         statement = select(Ouvrage).where(Ouvrage.isbn == isbn)
         return self.db.scalars(statement).first()
