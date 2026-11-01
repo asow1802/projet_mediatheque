@@ -11,7 +11,9 @@ idna==3.20
 Mako==1.4.3
 MarkupSafe==3.0.4
 opentelemetry-api==1.45.2
+phonenumbers==9.0.42
 pydantic==2.14.2
+pydantic-extra-types==2.11.1
 pydantic_core==2.50.2
 SQLAlchemy==2.1.6
 starlette==1.10.0

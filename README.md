@@ -19,3 +19,8 @@ Installation des paquets, puis remplissage de requirements.txt
 * *pip install fastapi uvicorn alembic "pydantic[email]" sqlalchemy*
 * *pip freeze > requirements.txt*
 * *alembic init alembic*
+
+# Wébographie
+
+* https://pydantic.dev/docs/validation/latest/api/pydantic-extra-types/pydantic_extra_types_phone_numbers/
+* https://pydantic.dev/docs/validation/latest/api/pydantic-extra-types/pydantic_extra_types_isbn/#_top

@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field, model_validator
 
 class EmpruntCreate(BaseModel):
     date_debut: date = Field(
-        ge=date(1900, 1, 1), le=date.today()
+        ge=date(1900, 1, 1)
     )
     date_retour_prevue: date = Field(
         ge=date(1900, 1, 1)
@@ -22,6 +22,12 @@ class EmpruntCreate(BaseModel):
             raise ValueError(
                         "La date de retour prévue doit etre dans le futur"
                         )
+        return self
+    def validation_date_debut(self):
+        if self.date_debut > date.today():
+            raise ValueError(
+            "La date de début ne peut pas etre dans le futur"
+            )
         return self
 class EmpruntUpdate(BaseModel):
     date_debut: date = Field(
@@ -49,4 +55,10 @@ class EmpruntUpdate(BaseModel):
             raise ValueError(
                         "La date de retour prévue doit etre postérieure à la date de début."
                         )
+        return self
+    def validation_date_debut(self):
+        if self.date_debut > date.today():
+            raise ValueError(
+            "La date de début ne peut pas etre dans le futur"
+            )
         return self
