@@ -1,9 +1,9 @@
-from datetime import date
-from sqlalchemy import String, Integer, Date
+from sqlalchemy import select
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.models.emprunt import Emprunt
 from app.schemas.emprunt import EmpruntCreate, EmpruntUpdate
+from app.models.__init__ import Ouvrage, Adherent
 
 class EmpruntRepository:
     def __init__(self, db: Session):
@@ -26,6 +26,14 @@ class EmpruntRepository:
                 id_adherent=data.id_adherent,
                 id_ouvrage=data.id_ouvrage
             )
+            id_adherent = data.id_adherent
+            id_ouvrage = data.id_ouvrage
+            adherent = self.db.get(Adherent, id_adherent)
+            ouvrage = self.db.get(Ouvrage, id_ouvrage)
+            if adherent is None:
+                raise ValueError(f"L'adhérent avec l'identifiant {id_adherent} n'existe pas.")
+            elif ouvrage is None:
+                raise ValueError(f"L'ouvrage avec l'identifiant {id_ouvrage} n'existe pas.")
             self.db.add(emprunt)
             self.db.commit()
             self.db.refresh(emprunt)
@@ -55,3 +63,7 @@ class EmpruntRepository:
         self.db.delete(emprunt)
         self.db.commit()
         return True
+    
+    def get_by_adherent(self, id_adherent: int) -> list[Emprunt]:
+        statement = select(Emprunt).where(Emprunt.id_adherent == id_adherent)
+        return list(self.db.scalars(statement).all())
