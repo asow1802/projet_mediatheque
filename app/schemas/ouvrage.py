@@ -12,6 +12,7 @@ class OuvrageCreate(BaseModel):
     titre: str = Field(min_length=1, max_length=100)
     nombre_de_pages: int = Field(gt=0)
     editeur: str = Field(min_length=2, max_length=100)
+    genre: str = Field(min_length=2, max_length=50)
     id_auteur: int = Field(gt=0)
     
     @model_validator(mode="after")
@@ -31,6 +32,7 @@ class OuvrageUpdate(BaseModel):
     titre: str = Field(min_length=1, max_length=100)
     nombre_de_pages: int = Field(gt=0)
     editeur: str = Field(min_length=2, max_length=100)
+    genre: str = Field(min_length=2, max_length=50)
     id_auteur: int = Field(gt=0)
     @model_validator(mode="after")
     def validation_date_publication(self):

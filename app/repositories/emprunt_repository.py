@@ -15,7 +15,7 @@ class EmpruntRepository:
     def get_all(self) -> list[Emprunt]:
         statement = select(Emprunt).order_by(Emprunt.id_emprunt)
         return list(self.db.scalars(statement).all())
-
+    ## On définit la méthode create pour créer un nouvel emprunt
     def create(
             self,
             data: EmpruntCreate
@@ -30,6 +30,12 @@ class EmpruntRepository:
             id_ouvrage = data.id_ouvrage
             adherent = self.db.get(Adherent, id_adherent)
             ouvrage = self.db.get(Ouvrage, id_ouvrage)
+            all_emprunts = self.get_all()
+            ## On vérifie si l'ouvrage est déjà emprunté et n'a pas encore été retourné
+            for existing_emprunt in all_emprunts:
+                if existing_emprunt.id_ouvrage == id_ouvrage and existing_emprunt.date_retour_effective is None:
+                    raise ValueError(f"L'ouvrage avec l'identifiant {id_ouvrage} est déjà emprunté et n'a pas encore été retourné.")
+            ## On vérifie si l'adhérent et l'ouvrage existent dans la base de données avant de créer l'emprunt
             if adherent is None:
                 raise ValueError(f"L'adhérent avec l'identifiant {id_adherent} n'existe pas.")
             elif ouvrage is None:
@@ -38,7 +44,7 @@ class EmpruntRepository:
             self.db.commit()
             self.db.refresh(emprunt)
             return emprunt
-
+    ## On définit la méthode update pour mettre à jour un emprunt existant
     def update(
         self,
         id_emprunt: int,

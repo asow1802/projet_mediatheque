@@ -26,6 +26,7 @@ class OuvrageRepository:
             titre=data.titre,
             nombre_de_pages=data.nombre_de_pages,
             editeur=data.editeur,
+            genre=data.genre,
             id_auteur=data.id_auteur
         )
         id_auteur = data.id_auteur
@@ -50,6 +51,7 @@ class OuvrageRepository:
         ouvrage.titre = data.titre
         ouvrage.nombre_de_pages = data.nombre_de_pages
         ouvrage.editeur = data.editeur
+        ouvrage.genre = data.genre
         ouvrage.id_auteur = data.id_auteur
         self.db.commit()
         self.db.refresh(ouvrage)

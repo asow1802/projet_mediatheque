@@ -17,16 +17,16 @@ def load_fixtures():
     
     
     Ouvrages = [
-        Ouvrage(id_ouvrage=1,titre="Réseaux de neurones convolutifs", date_publication=date(2020,1,1), nombre_de_pages=200, editeur="Editeur A", isbn="9780000000026", id_auteur=1),
-        Ouvrage(id_ouvrage=2,titre="Deep learnig", date_publication=date(2021,2,15), nombre_de_pages=150, editeur="Editeur B", isbn="9780000000033", id_auteur=2),
-        Ouvrage(id_ouvrage=3,titre="Reconnaissance vocale", date_publication=date(2019,5,10), nombre_de_pages=300, editeur="Editeur C", isbn="9780000000040", id_auteur=3),
-        Ouvrage(id_ouvrage=4,titre="Apprentissage automatique", date_publication=date(2022,8,20), nombre_de_pages=250, editeur="Editeur D", isbn="9780000000057", id_auteur=4),
-        Ouvrage(id_ouvrage=5,titre="Optimisation", date_publication=date(2020,11,5), nombre_de_pages=180, editeur="Editeur E", isbn="9780000000064", id_auteur=5),
-        Ouvrage(id_ouvrage=6,titre="Réseaux de neurones récurrents", date_publication=date(2021,3,12), nombre_de_pages=220, editeur="Editeur F", isbn="9780000000071", id_auteur=1),
-        Ouvrage(id_ouvrage=7,titre="Apprentissage par renforcement", date_publication=date(2019,7,18), nombre_de_pages=280, editeur="Editeur G", isbn="9780000000088", id_auteur=2),
-        Ouvrage(id_ouvrage=8,titre="Vision par ordinateur", date_publication=date(2022,10,25), nombre_de_pages=320, editeur="Editeur H", isbn="9780000000095", id_auteur=3),
-        Ouvrage(id_ouvrage=9,titre="Traitement du langage naturel", date_publication=date(2020,6,30), nombre_de_pages=260, editeur="Editeur I", isbn="9780000000101", id_auteur=4),
-        Ouvrage(id_ouvrage=10,titre="Apprentissage profond", date_publication=date(2021,9,15), nombre_de_pages=240, editeur="Editeur J", isbn="9780000000118", id_auteur=5)
+        Ouvrage(id_ouvrage=1,titre="Réseaux de neurones convolutifs", date_publication=date(2020,1,1), nombre_de_pages=200, editeur="Editeur A", genre ="Informatique", isbn="9780000000026", id_auteur=1),
+        Ouvrage(id_ouvrage=2,titre="Deep learnig", date_publication=date(2021,2,15), nombre_de_pages=150, editeur="Editeur B",genre = "Informatique", isbn="9780000000033", id_auteur=2),
+        Ouvrage(id_ouvrage=3,titre="Reconnaissance vocale", date_publication=date(2019,5,10), nombre_de_pages=300, editeur="Editeur C",genre="Informatique", isbn="9780000000040", id_auteur=3),
+        Ouvrage(id_ouvrage=4,titre="Apprentissage automatique", date_publication=date(2022,8,20), nombre_de_pages=250, editeur="Editeur D",genre="Informatique", isbn="9780000000057", id_auteur=4),
+        Ouvrage(id_ouvrage=5,titre="Optimisation", date_publication=date(2020,11,5), nombre_de_pages=180, editeur="Editeur E",genre="Mathématiques", isbn="9780000000064", id_auteur=5),
+        Ouvrage(id_ouvrage=6,titre="Réseaux de neurones récurrents", date_publication=date(2021,3,12), nombre_de_pages=220, editeur="Editeur F",genre="Mathématiques", isbn="9780000000071", id_auteur=1),
+        Ouvrage(id_ouvrage=7,titre="Apprentissage par renforcement", date_publication=date(2019,7,18), nombre_de_pages=280, editeur="Editeur G",genre="Informatique", isbn="9780000000088", id_auteur=2),
+        Ouvrage(id_ouvrage=8,titre="Vision par ordinateur", date_publication=date(2022,10,25), nombre_de_pages=320, editeur="Editeur H",genre="Informatique", isbn="9780000000095", id_auteur=3),
+        Ouvrage(id_ouvrage=9,titre="Traitement du langage naturel", date_publication=date(2020,6,30), nombre_de_pages=260, editeur="Editeur I",genre="Informatique", isbn="9780000000101", id_auteur=4),
+        Ouvrage(id_ouvrage=10,titre="Apprentissage profond", date_publication=date(2021,9,15), nombre_de_pages=240, editeur="Editeur J", genre="Informatique", isbn="9780000000118", id_auteur=5)
     ]   
     
     Emprunts = [

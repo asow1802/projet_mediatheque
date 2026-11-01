@@ -17,6 +17,7 @@ class Ouvrage(Base):
     titre: Mapped[str] = mapped_column(String(100), nullable=False)
     nombre_de_pages: Mapped[int] = mapped_column(Integer, nullable=False)
     editeur: Mapped[str] = mapped_column(String(100), nullable=False)
+    genre: Mapped[str|None] = mapped_column(String(50), nullable=True)
     id_auteur: Mapped[int] = mapped_column(Integer,ForeignKey("auteurs.id_auteur"), nullable=False)
     auteur: Mapped["Auteur"] = relationship(back_populates="ouvrages")
     emprunts: Mapped[list["Emprunt"]] = relationship(back_populates="ouvrage")
